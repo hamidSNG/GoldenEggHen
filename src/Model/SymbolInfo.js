@@ -7,15 +7,21 @@ class SymbolInfo extends Component {
 
     constructor(props)
     {
+      
         super(props);
+        console.log(props);
         this.state = {
-            
+            isin : this.props.isin,
             symbolData : "is null"
         }
 
-        setInterval(()=>{
-            this.GetSymboleData();
-        },10000)
+    
+    }
+
+    componentDidMount(){
+        this.timerId = setInterval(()=>{
+            this.GetSymboleData(this.state.isin);
+        },30000)
     }
 
     GetSymboleData = (isin)=>
@@ -36,7 +42,7 @@ class SymbolInfo extends Component {
 
         return React.createElement(
 
-            'h1', null, this.state.testData
+            'h1', null, this.state.symbolData
         );
     }
 }
