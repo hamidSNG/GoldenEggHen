@@ -1,53 +1,56 @@
 var convert = require('xml-js');
-var symboleData= {}
 
-let url = 'http://www.tsetmc.com/Loader.aspx?Partree=151316&Flow=1';
-var x = '';
-const proxyurl = "https://cors-anywhere.herokuapp.com/";
-fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
-.then(response => response.text())
-.then(contents => process(contents))
-.catch(console.log("Can’t acces " + url + " response. Blocked browser?")) 
-
-var process = function(returnData)
-{
-    var el = document.createElement( 'html' );
-    el.innerHTML = returnData;
-    console.log(returnData);
-    //var formContent =el.getElementsByTagName('form')['form1'];
-    
-    var t = el.getElementsByTagName("table")[0];
-    
-
-    var obj = [].reduce.call(t.rows, function(res, row) {
-        res[row.cells[0].textContent] = row.cells[3].textContent;
-        return res
-    }, {});
-    for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            console.log(key + " -> " + obj[key]);
-        }
+export default class ImpactOnIndex {
+    constructor() {
+        var symboleData = {}
+        let url = 'http://www.tsetmc.com/Loader.aspx?Partree=151316&Flow=1';
+        var x = '';
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
     }
 
-   // formContent = '<?xml version="1.0" encoding="utf-8"?>' +String.toString(formContent);
-    //let jsonContent = convert.xml2json(, {compact: true, spaces: 4})
-    //let scriptData= formContent.getElementsByTagName('script')[0].innerHTML;
-    // scriptData =scriptData.toString().replace(";", ","); 
-    // scriptData =scriptData.toString().replace(";", ","); 
-   // scriptData =scriptData.toString().replace(',',';'); 
+    getData() {
+        fetch(this.proxyurl + this.url)
+            .then(response => response.text())
+            .then(contents => process(contents))
+            .catch(console.log("Can’t acces " + url + " response. Blocked browser?"))
 
-    
-    
-    
-//     scriptData =scriptData.toString().replace("var", ""); 
+        var process = function (returnData) {
+            var el = document.createElement('html');
+            el.innerHTML = returnData;
 
-//     scriptData = 'var  obj= {' + scriptData + ';}';
-    //let arr = scriptData.split(',');
+            var t = el.getElementsByTagName("table")[0];
+            // console.log(t.rows);
+            var obj = [].reduce.call(t.rows, function (res, row) {
+                res[row.cells[0].textContent] = {
+                    impact: row.cells[3].textContent,
+                    url: row.cells[0].children[0]
+                };
+                return res
+            }, {});
 
-    //console.log(JSON.parse(scriptData));
-   // var x = JSON.parse(returnData)
-   // console.log(x.IndInstTrade.SymbolFa);
-    // eval(scriptData); 
-    // console.log(LSecVal);
+            var impacts = [];
+            let i = 0;
+            for (var key in obj) {
+                if (key == 'نماد') {} else {
+                    if (obj.hasOwnProperty(key)) {
+                        if (obj[key].impact.includes(")")) {
+                            i = obj[key].impact.replace(")", "");
+                            i = -1 * i.replace("(", "");
+                        } else {
+                            i = 1 * obj[key].impact;
+                        }
+                        impacts.push({
+                            symbol: key,
+                            impact: i,
+                            url: obj[key].url.href
+                        })
+                    }
+                }
+            }
+            return impacts;
+        }
+        process();
+    }
+
+
 }
-process();

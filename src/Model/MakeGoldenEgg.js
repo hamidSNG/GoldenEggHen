@@ -1,0 +1,8 @@
+class MakeGoldenEgg {
+    constructor()
+    {
+
+    }
+
+    MakeOnIndex
+}
