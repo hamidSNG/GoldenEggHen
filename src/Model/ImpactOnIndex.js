@@ -52,5 +52,4 @@ export default class ImpactOnIndex {
         process();
     }
 
-
 }
