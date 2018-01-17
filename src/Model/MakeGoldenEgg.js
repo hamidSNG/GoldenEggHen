@@ -1,8 +1,18 @@
-class MakeGoldenEgg {
-    constructor()
-    {
+import ImpactOnIndex from "./ImpactOnIndex";
 
+export class MakeGoldenEgg extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {  }
     }
 
-    MakeOnIndex
+    makeEgg(data)
+    {
+      var ioiList  = ImpactOnIndex.getData();
+    }
+    render() { 
+        return ( )
+    }
 }
+ 
+export default MakeGoldenEgg;

@@ -1,6 +1,6 @@
 var convert = require('xml-js');
 
-export default class ImpactOnIndex {
+export default class     {
     constructor() {
         var symboleData = {}
         let url = 'http://www.tsetmc.com/Loader.aspx?Partree=151316&Flow=1';
