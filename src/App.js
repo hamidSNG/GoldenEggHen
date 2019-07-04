@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ClientChangesChart from './Model/ClientChangesChart.js';
+import OptionList from './Model/OptionList.js'
 
 
 
@@ -20,6 +21,8 @@ class App extends Component {
         </p>
         
         <ClientChangesChart />
+<OptionList />
+
       
       </div>
     );
