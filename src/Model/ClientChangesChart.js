@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, ReferenceLine,
     ReferenceDot, Tooltip, CartesianGrid, Legend, Brush, ErrorBar, AreaChart, Area,
-    Label, LabelList } from 'recharts';
+    Label, LabelList } from 'rechart';
     
 class ClientChangesChart extends Component {
     constructor(props) {
@@ -35,5 +35,5 @@ class ClientChangesChart extends Component {
           </LineChart> )
     }
 }
- 
+
 export default ClientChangesChart;
