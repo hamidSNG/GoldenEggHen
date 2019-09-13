@@ -2,6 +2,7 @@ import React, {
     Component
 } from 'react'
 import ReactDOM from 'react-dom';
+import buildQuery from 'odata-query'
 
 class SymbolInfo extends Component {
 
@@ -20,13 +21,15 @@ class SymbolInfo extends Component {
 
 
     componentDidMount() {
-        this.timerId = setInterval(() => {
+        //this.timerId = setInterval(() => {
             this.GetSymboleData(this.state.isin);
-        }, 30000)
+        //}, 30000)
     }
 
     GetSymboleData = (isin) => {
-        let url = `http://mdapi.tadbirrlc.com/api/INDINSTTRADE/${isin}`;
+        const filter = {SymbolISIN : isin}
+        const query = buildQuery({filter});
+        let url = `http://mdapi.tadbirrlc.com/api/symbol/${query}`;
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
             .then(response => response.text())
@@ -36,9 +39,11 @@ class SymbolInfo extends Component {
                 });
             })
             .catch(console.log("Can’t acces " + url + " response. Blocked browser?"))
+        
 
     }
-
+    
+    
     render() {
 
         return React.createElement(

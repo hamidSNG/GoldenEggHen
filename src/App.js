@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ClientChangesChart from './Model/ClientChangesChart.js';
 import OptionList from './Model/OptionList.js'
+import SymbolInfo from './Model/SymbolInfo.js'
 
 
 
@@ -20,8 +21,9 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         
-        <ClientChangesChart />
+       
 <OptionList />
+{/* <SymbolInfo isin="IRO1BTEJ0001" /> */}
 
       
       </div>
